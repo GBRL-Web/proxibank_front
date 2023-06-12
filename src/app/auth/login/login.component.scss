@@ -1,0 +1,56 @@
+@import "../../../colors";
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  height: 800px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0px 15px 15px;
+  .card {
+    border-radius: 15px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+    .card-header {
+      border-radius: 13px 0px 0px 0px;
+      padding: 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(9, 9, 121, 1) 5%,
+        rgba(0, 212, 255, 0) 100%
+      );
+      color: white;
+    }
+    .card-content {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      input {
+        display: flex;
+        align-self: flex-end;
+        height: 30px;
+        width: 100%;
+      }
+    }
+    button {
+      margin-top: auto;
+      margin-bottom: auto;
+      background: rgb(45, 45, 185);
+      color: white;
+      border: 0;
+      height: 40px;
+      font-family: "Poppins", sans-serif;
+      &:hover {
+        background: rgb(92, 92, 185);
+      }
+      &:active {
+        background: rgb(29, 29, 129);
+      }
+    }
+  }
+}
