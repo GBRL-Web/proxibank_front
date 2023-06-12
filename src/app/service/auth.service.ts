@@ -11,8 +11,15 @@ export class AuthenticationService {
   private link = 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) {
-    // Check if the user is already logged in
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      // Check if the user is already logged in
+      if (localStorage.getItem('currentUser') !== null) {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      } else {
+        const currentUser = 'not logged in';
+      }
+}
+
+ngOnInit(): void { 
   }
 
   login(username: string, password: string): Observable<Employee> {

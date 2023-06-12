@@ -21,7 +21,9 @@ export class LoginComponent {
         (error: any) => alert(error)
       );
     } else {
-      alert("Veuillez saisir à la fois le nom d'utilisateur et le mot de passe");
+      console.log('Duh.');
+      
     }
   }
 }
+

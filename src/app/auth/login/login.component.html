@@ -7,14 +7,32 @@
       <div class="card-content">
         <div>
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" class="form-control" ngModel/>
+          <input
+            type="text"
+            autocomplete="off"
+            id="username"
+            name="username"
+            class="form-control"
+            ngModel
+          />
         </div>
         <div>
           <label for="password">Password:</label>
-          <input type="password" name="password" id="password" class="form-control" ngModel/>
+          <input
+            type="password"
+            autocomplete="off"
+            name="password"
+            id="password"
+            class="form-control"
+            ngModel
+          />
         </div>
       </div>
       <button type="submit">Login</button>
     </div>
   </form>
 </div>
+
+<dialog #errorDialog>
+    
+</dialog>

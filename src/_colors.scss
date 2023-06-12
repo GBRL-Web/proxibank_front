@@ -1,16 +1,13 @@
-.bkg-primary {
-    background: linear-gradient(
+$bkg-primary : linear-gradient(
         0deg,
         rgba(2, 0, 36, 1) 0%,
         rgba(36, 36, 116, 0.719) 25%,
         rgba(0, 212, 255, 0) 100%
       );
-}
-.bkg-secondary {
-    background: linear-gradient(
+
+$bkg-secondary : linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.50) 0%,
       rgba(112, 112, 163, 1) 3%,
       rgba(0, 212, 255, 0) 100%
     );
-}

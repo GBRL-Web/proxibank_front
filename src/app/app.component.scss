@@ -1,0 +1,27 @@
+@import "../colors";
+.topbar-container {
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+    width: 1000px;
+    background: rgba(255, 255, 255, 0.39);
+    border-radius: 0 0px 15px 15px;
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    height: 800px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0px 15px 15px;
+    background: $bkg-primary;
+}
+.footer-p {
+    color: rgba(255, 255, 255, 0.39);
+    font-size: 10px;
+    position: absolute;
+    bottom: 10px;
+}
