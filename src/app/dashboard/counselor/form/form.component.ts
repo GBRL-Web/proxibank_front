@@ -23,8 +23,11 @@ export class FormComponent {
   constructor(private clientService: ClientService) {}
 
   ngOnInit() { 
-    this.selectedClient = this.clientService.getSelectedClient();
+    this.clientService.getSelectedClient().subscribe( (client: Client) => {
+      this.selectedClient= client;
+    }),
     this.initForm();
+    this.onCreate = true;
   }
 
   private initForm() {
@@ -68,7 +71,11 @@ export class FormComponent {
   }
 
   onAddClient() {
-
+    this.onSubmitForm();
+    this.clientForm.reset();
+    this.onRead = false;
+    this.onEdit = false;
+    this.onCreate = true;
   }
 
   onSubmitForm() {
@@ -114,5 +121,36 @@ export class FormComponent {
         }
       });
     }
+  }
+  onEditClient() {
+    this.onCreate = false;
+    this.onRead = false;
+    this.onEdit = true;
+    if (this.selectedClient) {
+      this.clientForm.patchValue({
+        name: this.selectedClient.name,
+        surname: this.selectedClient.surname,
+        address: this.selectedClient.address,
+        zip: this.selectedClient.zip,
+        city: this.selectedClient.city,
+        tel: this.selectedClient.tel
+      });
+    }
+  }
+
+  onCancelEdit() {
+    this.onCreate = true;
+    this.onEdit = false;
+    this.onRead = true;
+    this.updateFormValues(this.selectedClient);
+    this.clientForm.reset();
+  }
+
+  onResetForm() {
+    this.onCreate = true;
+    this.onEdit = false;
+    this.onRead = true;
+    this.clientForm.reset();
+    this.clientService
   }
 }

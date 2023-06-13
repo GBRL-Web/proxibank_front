@@ -13,6 +13,8 @@ export class ClientService {
   private clients!: Client[];
   private clientsSubject = new Subject<Client[]>();
   clients$ = this.clientsSubject.asObservable();
+  private clientSubject = new Subject<Client>();
+  selectedClient$ = this.clientSubject.asObservable();
   private selectedClient!: Client;
 
   constructor(private http: HttpClient) {
@@ -87,13 +89,15 @@ export class ClientService {
   }
 
   selectClient(client: Client) {
-    console.log('client selected', client);
-    
-    this.selectedClient = client;
+     this.clientSubject.next(client);
   }
 
   getSelectedClient() {
-    return this.selectedClient;
+    return this.selectedClient$;
+  }
+
+  resetSelectedClient() {
+    this.clientSubject.next(null);
   }
 
 }

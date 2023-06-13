@@ -92,13 +92,13 @@
             <button
               type="button"
               class="btn btn-secondary rounded-0"
-              *ngIf="onCreate"
+              *ngIf="onCreate && !selectedClient"
               (click)="onAddClient()"
             >
               Add Client
             </button>
   
-           <!--  <button
+            <button
               *ngIf="selectedClient && onRead"
               type="button"
               class="btn btn-warning rounded-0"
@@ -106,6 +106,14 @@
             >
               Edit Client
             </button>
+            <button
+            *ngIf="selectedClient && onRead"
+            type="button"
+            class="btn btn-warning rounded-0"
+            (click)="onResetForm()"
+          >
+            Reset Selection
+          </button>
   
             <button
               *ngIf="onEdit"
@@ -123,7 +131,7 @@
               (click)="onCancelEdit()"
             >
               Cancel
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
