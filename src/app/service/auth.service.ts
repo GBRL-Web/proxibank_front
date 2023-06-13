@@ -5,31 +5,36 @@ import { Auth } from '../models/auth';
 import { Employee } from '../models/employee';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   private link = 'http://localhost:8080/auth';
+  _isAuthenticated: boolean = false;
 
   constructor(private http: HttpClient) {
-      // Check if the user is already logged in
-      if (localStorage.getItem('currentUser') !== null) {
-          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      } else {
-        const currentUser = 'not logged in';
-      }
-}
-
-ngOnInit(): void { 
+    console.log(JSON.parse(sessionStorage.getItem('currentUser')|| '{}'));
+    
+    // Check if the user is already logged in
+    if (sessionStorage.getItem('currentUser') !== null) {
+      console.log('User logged in');
+      this._isAuthenticated = true;
+    } else {
+      console.log('User not logged in');
+    }
   }
+
+  ngOnInit(): void {}
 
   login(username: string, password: string): Observable<Employee> {
     const auth = new Auth(username, password);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Employee>(`${this.link}/login`, auth, { headers })
+    return this.http
+      .post<Employee>(`${this.link}/login`, auth, { headers })
       .pipe(
         tap((employee: Employee) => {
           // Store the user's session data in local storage
           sessionStorage.setItem('currentUser', JSON.stringify(employee));
+          this._isAuthenticated = true;
         }),
         catchError((error: any) => {
           console.error(error);
@@ -41,6 +46,6 @@ ngOnInit(): void {
   // Remove the user's session data from local storage
   logout() {
     sessionStorage.removeItem('currentUser');
+    this._isAuthenticated = false;
   }
-
 }

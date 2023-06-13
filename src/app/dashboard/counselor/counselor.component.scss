@@ -1,0 +1,15 @@
+.detailsdiv {
+  background: rgba($color: #e4e4e433, $alpha: 0.2);
+  width: 700px;
+  height: 650px;
+}
+
+.flexCenter {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+h3 {
+  color: white;
+}

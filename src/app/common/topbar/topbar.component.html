@@ -1,20 +1,26 @@
 <ng-container *ngIf="isConnected(); else default">
+  <div class="full-nav">
     <div class="half">
-        <button class="btn" (click)="logout()" role="button">Deconnexion</button>
+      <button class="btn" (click)="logout()" role="button">Deconnexion</button>
     </div>
     <div class="half">
-        <!-- <div class="half left">
-            <div class="infoNav">
-            <h4>James Kahn</h4>
-            <p>Counselor</p>
-            <p>Agence Lille 0122</p>
-        </div> -->
-        <!-- </div> -->
-        <!-- <div class="half right"> -->
-            <!-- <img class="avatar" src="../../../assets/img/img_avatar_male.png" alt="Image"> -->
-        <!-- </div> -->
+      <div class="half left">
+        <div class="infoNav">
+          <h4>{{employee.name}} {{employee.surname}}</h4>
+          <p>{{employee.role}}</p>
+          <p>agence Lille 0122</p>
+        </div>
+      </div>
+      <div class="right">
+        <img
+          class="avatar"
+          src="../../../assets/img/img_avatar_male.png"
+          alt="Image"
+        />
+      </div>
     </div>
+  </div>
 </ng-container>
 <ng-template #default>
-    <h3 class="centered">Please login...</h3>
+  <h3 class="centered">Login to use this application.</h3>
 </ng-template>

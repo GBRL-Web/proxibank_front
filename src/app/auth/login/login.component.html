@@ -24,6 +24,7 @@
             name="password"
             id="password"
             class="form-control"
+            (keyup.enter) = "onSubmit(f)"
             ngModel
           />
         </div>
@@ -32,7 +33,3 @@
     </div>
   </form>
 </div>
-
-<dialog #errorDialog>
-    
-</dialog>

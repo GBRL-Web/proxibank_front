@@ -1,0 +1,16 @@
+<div>
+    <div *ngIf="(clients$ | async)?.length; else loading">
+      <div class="overflow-auto">
+        <ol class="list-group">
+          <app-user
+            *ngFor="let cl of allClients"
+            [client]="cl"
+          ></app-user>
+        </ol>
+      </div>
+    </div>
+    <ng-template #loading>
+      <p>Loading...</p>
+    </ng-template>
+  </div>
+  

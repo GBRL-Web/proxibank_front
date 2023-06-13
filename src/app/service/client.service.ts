@@ -15,7 +15,7 @@ export class ClientService {
   clients$ = this.clientsSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    const counselorId = JSON.parse(sessionStorage.getItem('currentUser')).id;
+    const counselorId = JSON.parse(sessionStorage.getItem('currentUser') || '{}').id;
     this.http
       .get<Client[]>(`${this.link}/counselor/${counselorId}`)
       .subscribe((clients) => {
@@ -29,7 +29,7 @@ export class ClientService {
   }
 
   getClients(): Observable<Client[]> {
-    const counselorId = JSON.parse(sessionStorage.getItem('currentUser')).id;
+    const counselorId = JSON.parse(sessionStorage.getItem('currentUser') || '{}').id;
     return this.http.get<Client[]>(`${this.link}/counselor/${counselorId}`).pipe(
       tap(clients => {
         this.clients = clients;
@@ -56,8 +56,8 @@ export class ClientService {
       );
   }
   
-  createClient(client: ClientToPost): Observable<Client> {
-    const id_cls = JSON.parse(sessionStorage.getItem('currentUser'));
+  createClient(client: Client): Observable<Client> {
+    const id_cls = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
     return this.http.post<Client>(`${this.link}/counselors/${id_cls.id}`, client)
       .pipe(
         catchError((error: HttpErrorResponse) => {

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Employee } from 'src/app/models/employee';
+import { AuthenticationService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -6,13 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
-  connectedValue: boolean = true;
+  employee!: Employee;
 
+  constructor(private authService: AuthenticationService, private router: Router) {
+  }
+  
   isConnected(): boolean {
-    return this.connectedValue;
+    this.employee = JSON.parse(sessionStorage.getItem('currentUser')|| '{}');
+     return this.authService._isAuthenticated;
   }
 
   logout(): void {
-    this.connectedValue = false;
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
