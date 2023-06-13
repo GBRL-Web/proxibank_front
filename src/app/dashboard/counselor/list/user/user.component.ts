@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Client } from 'src/app/models/client';
+import { ClientService } from 'src/app/service/client.service';
 
 @Component({
   selector: 'app-user',
@@ -9,8 +10,9 @@ import { Client } from 'src/app/models/client';
 export class UserComponent {
 @Input() client!: Client;
 
+constructor(private clientService: ClientService) {}
 
  showDetails() {
-  console.log('yes.');  
+  this.clientService.selectClient(this.client);
  }
 }

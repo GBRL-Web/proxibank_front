@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Client } from '../models/client';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
@@ -13,6 +13,7 @@ export class ClientService {
   private clients!: Client[];
   private clientsSubject = new Subject<Client[]>();
   clients$ = this.clientsSubject.asObservable();
+  private selectedClient!: Client;
 
   constructor(private http: HttpClient) {
     const counselorId = JSON.parse(sessionStorage.getItem('currentUser') || '{}').id;
@@ -84,4 +85,15 @@ export class ClientService {
   getAllClients(): Observable<Client[]> {
     return this.clientsSubject.asObservable();
   }
+
+  selectClient(client: Client) {
+    console.log('client selected', client);
+    
+    this.selectedClient = client;
+  }
+
+  getSelectedClient() {
+    return this.selectedClient;
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/service/client.service';
 
@@ -11,7 +12,8 @@ import { ClientService } from 'src/app/service/client.service';
 export class FormComponent {
   clientForm!: FormGroup;
 
-  @Input() selectedClient!: Client;
+  selectedClient$!: Observable<Client | null>;
+  selectedClient!: Client;
   onCreate: boolean = false;
   onEdit: boolean = false;
   @Input() onRead: boolean = true;
@@ -20,10 +22,8 @@ export class FormComponent {
 
   constructor(private clientService: ClientService) {}
 
-  ngOnInit() {
-    this.onCreate =true;
-    this.onRead = false;
-    this.onEdit = false;
+  ngOnInit() { 
+    this.selectedClient = this.clientService.getSelectedClient();
     this.initForm();
   }
 
@@ -54,7 +54,7 @@ export class FormComponent {
     this.updateFormValues(this.selectedClient);
   }
 
-  updateFormValues(client: Client) {
+  updateFormValues(client: Client | null) {
     if (client) {
       this.clientForm.patchValue({
         name: client.name,
@@ -67,7 +67,11 @@ export class FormComponent {
     }
   }
 
-  onSubmit() {
+  onAddClient() {
+
+  }
+
+  onSubmitForm() {
     const formValue = this.clientForm.value;
     const clientData = {
       name: formValue.name,
@@ -94,53 +98,21 @@ export class FormComponent {
 
     if (this.onCreate) {
       const updatedClient: Client = {
-        id: 1,
+        id: 0,
         ...clientData
       };
       this.clientService.createClient(updatedClient).subscribe({
         next:(result : Client) => {
           this.clientService.updateClientsAfterAdd(result);
-          console.log('New client added successfully!')
+          alert('Nouveau client créee!')
           this.onEdit = false;
           this.onRead = true;
           this.clientForm.reset();
         },
-        error:(err:any) => {
+        error:(err) => {
           alert(err);
         }
       });
     }
-  }
-
-  onAddClient() {
-    this.onSubmit();
-    this.clientForm.reset();
-    this.onRead = false;
-    this.onEdit = false;
-    this.onCreate = true;
-  }
-
-  onEditClient() {
-    this.onCreate = false;
-    this.onRead = false;
-    this.onEdit = true;
-    if (this.selectedClient) {
-      this.clientForm.patchValue({
-        name: this.selectedClient.name,
-        surname: this.selectedClient.surname,
-        address: this.selectedClient.address,
-        zip: this.selectedClient.zip,
-        city: this.selectedClient.city,
-        tel: this.selectedClient.tel
-      });
-    }
-  }
-
-  onCancelEdit() {
-    this.onCreate = true;
-    this.onEdit = false;
-    this.onRead = true;
-    this.updateFormValues(this.selectedClient);
-    this.clientForm.reset();
   }
 }

@@ -1,5 +1,5 @@
-<div class="main-form">
-    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+<div class="main-form" >
+    <form [formGroup]="clientForm" >
       <div class="mb-3 row">
         <div class="col-sm-9">
           <input
@@ -98,7 +98,7 @@
               Add Client
             </button>
   
-            <button
+           <!--  <button
               *ngIf="selectedClient && onRead"
               type="button"
               class="btn btn-warning rounded-0"
@@ -123,7 +123,7 @@
               (click)="onCancelEdit()"
             >
               Cancel
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
