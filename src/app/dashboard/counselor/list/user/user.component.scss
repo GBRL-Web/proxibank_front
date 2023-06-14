@@ -4,11 +4,10 @@ li {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   height: 50px;
   width: 250px;
   color: white;
-  border-radius: 5px;
   transition-duration: 300ms;
   .arrow {
     opacity: 0.1;
@@ -29,9 +28,8 @@ li {
   }
   &:hover {
     color: black;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px 0 0 15px;
     transition-duration: 300ms;
     .arrow {
         opacity: 0.8;        
@@ -60,5 +58,24 @@ li {
         display: flex;
         width: 100%;
         justify-content: space-between;
+    }
+}
+
+.chosen {
+  color: black;
+  background: rgba(255, 255, 255, 0.69);
+
+    border-radius: 25px 0 0 25px;
+    transition-duration: 300ms;
+    .arrow {
+        opacity: 0.8;        
+        transition-duration: 200ms;
+    }
+    .iDiv {
+      img {
+        filter: blur(0);
+        transition-duration: 300ms;
+        opacity: 0.8;
+      }
     }
 }

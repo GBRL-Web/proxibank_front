@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/service/client.service';
 
@@ -10,10 +10,12 @@ import { ClientService } from 'src/app/service/client.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent {
-  clientForm!: FormGroup;
 
+  clientForm!: FormGroup;
   selectedClient$!: Observable<Client | null>;
   selectedClient!: Client;
+  private readonly destroySubj = new Subject<void>();
+
   onCreate: boolean = false;
   onEdit: boolean = false;
   @Input() onRead: boolean = true;
@@ -23,11 +25,12 @@ export class FormComponent {
   constructor(private clientService: ClientService) {}
 
   ngOnInit() { 
-    this.clientService.getSelectedClient().subscribe( (client: Client) => {
-      this.selectedClient= client;
-    }),
+    this.clientService.selectedClient$.pipe(takeUntil(this.destroySubj)).subscribe((client: Client) => {
+      this.selectedClient = client;
+    });
     this.initForm();
-    this.onCreate = true;
+    console.log('Initializing...');
+    
   }
 
   private initForm() {
@@ -55,9 +58,13 @@ export class FormComponent {
       ])
     });
     this.updateFormValues(this.selectedClient);
+    this.onCreate = true;
+    console.log('Initializer called...');
+    
   }
 
   updateFormValues(client: Client | null) {
+    
     if (client) {
       this.clientForm.patchValue({
         name: client.name,
@@ -68,6 +75,7 @@ export class FormComponent {
         tel: client.tel
       });
     }
+    console.log('[UPDATE FORM]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
   onAddClient() {
@@ -76,6 +84,7 @@ export class FormComponent {
     this.onRead = false;
     this.onEdit = false;
     this.onCreate = true;
+    console.log('[ADD]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
   onSubmitForm() {
@@ -101,6 +110,7 @@ export class FormComponent {
         this.onRead = true;
         this.clientForm.reset();
       });
+      console.log('[UPDATE]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
     }
 
     if (this.onCreate) {
@@ -121,6 +131,7 @@ export class FormComponent {
         }
       });
     }
+    console.log('[CREATE]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
   onEditClient() {
     this.onCreate = false;
@@ -136,21 +147,24 @@ export class FormComponent {
         tel: this.selectedClient.tel
       });
     }
+    console.log('[EDIT]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
   onCancelEdit() {
-    this.onCreate = true;
+    this.onCreate = false;
     this.onEdit = false;
     this.onRead = true;
     this.updateFormValues(this.selectedClient);
     this.clientForm.reset();
+    console.log('[CANCEL]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
   onResetForm() {
     this.onCreate = true;
     this.onEdit = false;
-    this.onRead = true;
+    this.onRead = false;
     this.clientForm.reset();
-    this.clientService
+    this.clientService.selectClient(null);
+    console.log('[RESET]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 }

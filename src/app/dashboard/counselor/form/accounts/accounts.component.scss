@@ -1,0 +1,31 @@
+.main-accounts {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  width: 700px;
+  .table {
+    width: 90%;
+    background: rgba($color: #ffffff, $alpha: 0.4);
+    tr {
+        height: 40px;
+      td {
+        text-align: center;
+        button {
+          width: 50px;
+          border: none;
+          &:hover {
+            background: lighten(rgba(255, 255, 255, 1), 1);
+          }
+          &:active {
+            background: darken(gray, 1);
+          }
+        }
+      }
+    }
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #666666a6;
+    color: #fff;
+  }
+}

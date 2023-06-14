@@ -1,16 +1,18 @@
 .flexCenter {
-  padding-top: 80px;
+  padding-top: 40px;
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .detailsdiv {
-  background: rgba($color: #e4e4e433, $alpha: 0.2);
+  background: rgba(255, 255, 255, 0.69);
   width: 700px;
   height: 650px;
 }
 
 h3 {
   color: white;
+  text-align: center;
+  font-size: 30px;
 }

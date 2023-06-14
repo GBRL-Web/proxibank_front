@@ -12,23 +12,25 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DirectorComponent } from './dashboard/director/director.component';
 import { ListComponent } from './dashboard/counselor/list/list.component';
 import { FormComponent } from './dashboard/counselor/form/form.component';
-import { AccountsComponent } from './dashboard/counselor/accounts/accounts.component';
 import { UserComponent } from './dashboard/counselor/list/user/user.component';
 import { DetailsComponent } from './dashboard/director/details/details.component';
+import { AccountsComponent } from './dashboard/counselor/form/accounts/accounts.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     TopbarComponent,
-    CounselorComponent,
     DashboardComponent,
     DirectorComponent,
+    CounselorComponent,
     ListComponent,
-    FormComponent,
-    AccountsComponent,
     UserComponent,
-    DetailsComponent
+    FormComponent,
+    DetailsComponent,
+    AccountsComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { DetailsComponent } from './dashboard/director/details/details.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
