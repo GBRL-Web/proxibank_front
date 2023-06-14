@@ -28,10 +28,7 @@ export class FormComponent {
     this.clientService.selectedClient$.pipe(takeUntil(this.destroySubj)).subscribe((client: Client) => {
       this.selectedClient = client;
     });
-    this.initForm();
-    this.clientService.selectedClient$.subscribe(client => console.log(client));
-    console.log('Initializing...');
-    
+    this.initForm();    
   }
 
   private initForm() {
@@ -59,13 +56,13 @@ export class FormComponent {
       ])
     });
     this.updateFormValues(this.selectedClient);
-    this.onCreate = true;
-    console.log('Initializer called...');
-    
+    console.log('Initializer called...');    
   }
 
   updateFormValues(client: Client | null) {
-    
+    if (client !== null) {
+      this.onRead = true;
+    }
     if (client) {
       this.clientForm.patchValue({
         name: client.name,
@@ -76,15 +73,21 @@ export class FormComponent {
         tel: client.tel
       });
     }
+    console.log('[UPDATE FORM]Client: ' + this.clientService.getSelectedClient());    
     console.log('[UPDATE FORM]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
+  }
+  onAddNew() {
+    this.onCreate = true;
+    this.onRead = false;
+    this.onEdit = false;
   }
 
   onAddClient() {
-    this.onSubmitForm();
-    this.clientForm.reset();
+    this.onCreate = true;
     this.onRead = false;
     this.onEdit = false;
-    this.onCreate = true;
+    this.onSubmitForm();
+    this.clientForm.reset();
     console.log('[ADD]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
@@ -115,19 +118,20 @@ export class FormComponent {
     }
 
     if (this.onCreate) {
-      const updatedClient: Client = {
-        id: 0,
+      const updatedClient = {
         ...clientData
-      };
+      } as Client;
       this.clientService.createClient(updatedClient).subscribe({
         next:(result : Client) => {
           this.clientService.updateClientsAfterAdd(result);
-          alert('Nouveau client créee!')
+          alert('New client added successfully!');
           this.onEdit = false;
           this.onRead = true;
+          this.onCreate = false;
           this.clientForm.reset();
         },
         error:(err) => {
+          this.onCreate = false;
           alert(err);
         }
       });
@@ -161,11 +165,11 @@ export class FormComponent {
   }
 
   onResetForm() {
-    this.onCreate = true;
+    this.onCreate = false;
     this.onEdit = false;
-    this.onRead = false;
+    this.onRead = true;
     this.clientForm.reset();
-    this.clientService.selectClient(null);  
+    this.clientService.selectClient(undefined);  
     console.log('[RESET]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 }

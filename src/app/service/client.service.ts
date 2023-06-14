@@ -15,6 +15,7 @@ export class ClientService {
   clients$ = this.clientsSubject.asObservable();
   private clientSubject = new Subject<Client>();
   selectedClient$ = this.clientSubject.asObservable();
+  private selectedClient!: Client;
 
   constructor(private http: HttpClient) {
     const counselorId = JSON.parse(sessionStorage.getItem('currentUser') || '{}').id;
@@ -88,10 +89,11 @@ export class ClientService {
   }
 
   selectClient(client: any) {
+    this.selectedClient = client;
      this.clientSubject.next(client);
   }
 
   getSelectedClient() {
-    return this.selectedClient$;
+    return this.selectedClient;
   }
 }

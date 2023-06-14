@@ -92,8 +92,8 @@
             <button
               type="button"
               class="btn btn-secondary"
-              *ngIf="onCreate && !selectedClient"
-              (click)="onAddClient()"
+              *ngIf="!selectedClient && onRead"
+              (click)="onAddNew()"
             >
               Add Client
             </button>
@@ -116,7 +116,7 @@
           </button>
   
             <button
-              *ngIf="onEdit"
+              *ngIf="onEdit || onCreate && !selectedClient"
               type="button"
               class="btn btn-success"
               (click)="onAddClient()"
@@ -125,7 +125,7 @@
             </button>
   
             <button
-              *ngIf="onEdit"
+              *ngIf="onEdit || onCreate && !selectedClient"
               type="button"
               class="btn btn-danger"
               (click)="onCancelEdit()"
