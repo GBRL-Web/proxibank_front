@@ -29,6 +29,7 @@ export class FormComponent {
       this.selectedClient = client;
     });
     this.initForm();
+    this.clientService.selectedClient$.subscribe(client => console.log(client));
     console.log('Initializing...');
     
   }
@@ -164,7 +165,7 @@ export class FormComponent {
     this.onEdit = false;
     this.onRead = false;
     this.clientForm.reset();
-    this.clientService.selectClient(null);
+    this.clientService.selectClient(null);  
     console.log('[RESET]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 }
