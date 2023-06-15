@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/service/client.service';
 
@@ -9,24 +9,27 @@ import { ClientService } from 'src/app/service/client.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  private readonly destroySubj = new Subject<void>();
 @Input() client!: Client;
-selClient! : Client;
+@Input() selClient! : Client;
+clientSub!: Subscription;
+editSub!: Subscription;
+editMode!: boolean;
 
 constructor(private clientService: ClientService) {}
 
 ngOnInit(): void {
-  this.clientService.selectedClient$.pipe(takeUntil(this.destroySubj)).subscribe((client: Client) => {
+ this.clientSub=  this.clientService.selectedClient$.subscribe((client: Client) => {
     this.selClient = client;
   });
+  this.editSub = this.clientService.editMode$.subscribe(mode => this.editMode = mode);
 }
 
  showDetails() {
-  this.clientService.selectClient(this.client);
+  this.clientService.selectClient(this.client);  
  }
 
  ngOnDestroy(): void {
-  this.destroySubj.next();
-  this.destroySubj.complete();
+  this.clientSub.unsubscribe();
+  this.editSub.unsubscribe();
  }
 }

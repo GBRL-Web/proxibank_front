@@ -8,21 +8,18 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   employee!: Employee;
-  isDir: boolean = false;
 
   constructor() {
     this.employee = JSON.parse(sessionStorage.getItem('currentUser')|| '{}');
     this.isDirector();
   }
 
-  isDirector(): void{
+  isDirector(): boolean{
     const employee = JSON.parse(sessionStorage.getItem('currentUser')|| '{}');
     if (employee.role !== 'director') {
-      console.log('Not director');
-      this.isDir = false;
-    } else {
-      console.log('Director');      
-      this.isDir = true;
+      return false;
+    } else {  
+      return true;
     }
   }
 }

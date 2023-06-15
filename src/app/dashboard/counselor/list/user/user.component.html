@@ -1,4 +1,4 @@
-<li class="list-group-item {{client == selClient ? 'chosen' : ''}}" (click)="showDetails()">
+<li class="list-group-item {{editMode && client !== selClient ? 'disabled' : ''}} {{client == selClient ? 'chosen' : ''}}"  (click)="showDetails()">
   <div class="iDiv">
     <img
       src="../../../../../assets/img/default_profil_picture.jpg"
@@ -6,7 +6,7 @@
     />
   </div>
   <div class="seps">
-    <div>{{ client.surname | uppercase }} {{ client.name }}</div>
+    <div>{{ client.name }} {{ client.surname | uppercase }}</div>
     <span class="arrow">➤</span>
   </div>
 </li>

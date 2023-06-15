@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from 'src/app/models/auth';
 import { Employee } from 'src/app/models/employee';
 import { AuthenticationService } from 'src/app/service/auth.service';
 
@@ -23,8 +24,9 @@ export class LoginComponent {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    if (value.username && value.password) {
-      this.authService.login(value.username, value.password).subscribe(
+    const credentials = new Auth(value.username, value.password);
+    if (credentials) {
+      this.authService.login(credentials).subscribe(
         () => {
           this.router.navigate(['/dashboard']);
         },

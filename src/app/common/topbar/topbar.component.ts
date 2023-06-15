@@ -15,6 +15,7 @@ export class TopbarComponent {
   }
   
   isConnected(): boolean {
+
     this.employee = JSON.parse(sessionStorage.getItem('currentUser')|| '{}');
      return this.authService._isAuthenticated;
   }

@@ -1,6 +1,6 @@
-<ng-container *ngIf="!isDir">
+<ng-container *ngIf="!isDirector()">
   <app-counselor></app-counselor>
 </ng-container>
 <ng-container>
-  <app-director *ngIf="isDir"></app-director>
+  <app-director *ngIf="isDirector()"></app-director>
 </ng-container>

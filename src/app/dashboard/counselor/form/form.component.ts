@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/service/client.service';
 
@@ -18,19 +18,29 @@ export class FormComponent {
 
   onCreate: boolean = false;
   onEdit: boolean = false;
+  isEditMode!: boolean;
+
+  clientSub!: Subscription;
+  modeSub!: Subscription;
+  
   @Input() onRead: boolean = true;
 
   @Output() userUpdated = new EventEmitter<Client>();
 
   constructor(private clientService: ClientService) {}
 
+  // Subscribes to SelectedClient and initializes the form.
   ngOnInit() { 
-    this.clientService.selectedClient$.pipe(takeUntil(this.destroySubj)).subscribe((client: Client) => {
+    this.clientSub = this.clientService.selectedClient$.subscribe((client: Client) => {
       this.selectedClient = client;
     });
-    this.initForm();    
+    this.initForm(); 
+    this.modeSub = this.clientService.editMode$.subscribe(editMode => {
+      this.isEditMode = editMode;
+    });   
   }
 
+  // Initialize the form with validations.
   private initForm() {
     this.clientForm = new FormGroup({
       name: new FormControl('', [
@@ -56,9 +66,9 @@ export class FormComponent {
       ])
     });
     this.updateFormValues(this.selectedClient);
-    console.log('Initializer called...');    
   }
 
+  // This function is called when a client is selected, this fills in the form values.
   updateFormValues(client: Client | null) {
     if (client !== null) {
       this.onRead = true;
@@ -73,24 +83,24 @@ export class FormComponent {
         tel: client.tel
       });
     }
-    console.log('[UPDATE FORM]Client: ' + this.clientService.getSelectedClient());    
-    console.log('[UPDATE FORM]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
+
+  // Enables input field completion when creating a new client
   onAddNew() {
     this.onCreate = true;
     this.onRead = false;
     this.onEdit = false;
+    this.clientService.setEditMode(true);
   }
 
+  // Function to create a new client
   onAddClient() {
-    this.onCreate = true;
-    this.onRead = false;
-    this.onEdit = false;
     this.onSubmitForm();
     this.clientForm.reset();
-    console.log('[ADD]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
+    this.clientService.setEditMode(false);
   }
 
+  // This is called when creating a new client or editing an existing client.
   onSubmitForm() {
     const formValue = this.clientForm.value;
     const clientData = {
@@ -114,9 +124,8 @@ export class FormComponent {
         this.onRead = true;
         this.clientForm.reset();
       });
-      console.log('[UPDATE]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
     }
-
+    // Condition if the client is created.
     if (this.onCreate) {
       const updatedClient = {
         ...clientData
@@ -136,12 +145,13 @@ export class FormComponent {
         }
       });
     }
-    console.log('[CREATE]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
+// Condition if the user's information is being updated
   onEditClient() {
     this.onCreate = false;
     this.onRead = false;
     this.onEdit = true;
+    this.clientService.setEditMode(true);
     if (this.selectedClient) {
       this.clientForm.patchValue({
         name: this.selectedClient.name,
@@ -152,24 +162,30 @@ export class FormComponent {
         tel: this.selectedClient.tel
       });
     }
-    console.log('[EDIT]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
   }
 
+  // Function to cancel the edit operation
   onCancelEdit() {
     this.onCreate = false;
     this.onEdit = false;
     this.onRead = true;
     this.updateFormValues(this.selectedClient);
     this.clientForm.reset();
-    console.log('[CANCEL]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
+    this.clientService.setEditMode(false);
   }
 
+  // Resets the form values to be able to create new clients
   onResetForm() {
     this.onCreate = false;
     this.onEdit = false;
     this.onRead = true;
     this.clientForm.reset();
     this.clientService.selectClient(undefined);  
-    console.log('[RESET]Edit: ' + this.onEdit + '/n', 'Create: ' + this.onCreate + '/n', 'Read: ' + this.onRead + '/n');
+  }
+
+  // Unsubscribe from all subscriptions. Check to see if any subscriptions are missing.
+  onDestroy() {
+    this.clientSub.unsubscribe();
+    this.modeSub.unsubscribe();
   }
 }

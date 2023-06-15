@@ -1,141 +1,126 @@
-<div class="main-form" >
-    <form [formGroup]="clientForm" >
-      <div class="mb-3 row">
-        <div class="col-sm-9">
-          <input
-            [readonly]="onRead"
-            formControlName="name"
-            type="text"
-            placeholder="{{ selectedClient ? selectedClient.name : 'Name...' }}"
-            class="form-control"
-            id="inputName"
-            required
-          />
-        </div>
+<div class="main-form">
+  <form [formGroup]="clientForm">
+    <div>
+      <input
+        [readonly]="onRead"
+        formControlName="name"
+        type="text"
+        placeholder="{{ selectedClient ? selectedClient.name : 'Name...' }}"
+        class="form-control"
+        id="inputName"
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        class="form-control"
+        [readonly]="onRead"
+        formControlName="surname"
+        type="text"
+        placeholder="{{
+          selectedClient ? selectedClient.surname : 'Surname...'
+        }}"
+        id="inputSurname"
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        class="form-control"
+        [readonly]="onRead"
+        formControlName="address"
+        type="text"
+        placeholder="{{
+          selectedClient ? selectedClient.address : 'Address...'
+        }}"
+        id="inputAdress"
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        class="form-control"
+        [readonly]="onRead"
+        formControlName="zip"
+        type="number"
+        placeholder="{{
+          selectedClient ? selectedClient.zip : 'Postal Code...'
+        }}"
+        id="inputZip"
+        required
+      />
+    </div>
+
+    <div>
+      <input
+        class="form-control"
+        [readonly]="onRead"
+        formControlName="city"
+        type="text"
+        placeholder="{{ selectedClient ? selectedClient.city : 'City...' }}"
+        id="inputCity"
+      />
+    </div>
+
+    <div>
+      <input
+        class="form-control"
+        [readonly]="onRead"
+        formControlName="tel"
+        type="text"
+        placeholder="{{ selectedClient ? selectedClient.tel : 'Telephone...' }}"
+        id="inputTel"
+      />
+
+      <div class="buttons">
+        <button
+          type="button"
+          class="btn btn-primary"
+          *ngIf="!selectedClient && onRead"
+          (click)="onAddNew()"
+        >
+          Add Client
+        </button>
+
+        <button
+          *ngIf="selectedClient && onRead"
+          type="button"
+          class="btn btn-warning"
+          (click)="onEditClient()"
+        >
+          Edit Client
+        </button>
+        <button
+          *ngIf="selectedClient && onRead"
+          type="button"
+          class="btn btn-warning"
+          (click)="onResetForm()"
+        >
+          Reset Selection
+        </button>
+
+        <button
+          *ngIf="onEdit || (onCreate && !selectedClient)"
+          type="button"
+          class="btn btn-success"
+          (click)="onAddClient()"
+        >
+          Save
+        </button>
+
+        <button
+          *ngIf="onEdit || (onCreate && !selectedClient)"
+          type="button"
+          class="btn btn-danger"
+          (click)="onCancelEdit()"
+        >
+          Cancel
+        </button>
       </div>
-  
-      <div class="mt-3 mb-3 row">
-        <div class="col-sm-9">
-          <input
-            class="form-control"
-            [readonly]="onRead"
-            formControlName="surname"
-            type="text"
-            placeholder="{{
-              selectedClient ? selectedClient.surname : 'Surname...'
-            }}"
-            id="inputSurname"
-            required
-          />
-        </div>
-      </div>
-  
-      <div class="mb-3 row">
-        <div class="col-sm-9">
-          <input
-            class="form-control"
-            [readonly]="onRead"
-            formControlName="address"
-            type="text"
-            placeholder="{{
-              selectedClient ? selectedClient.address : 'Address...'
-            }}"
-            id="inputAdress"
-            required
-          />
-        </div>
-      </div>
-  
-      <div class="mb-3 row">
-        <div class="col-sm-9">
-          <input
-            class="form-control"
-            [readonly]="onRead"
-            formControlName="zip"
-            type="number"
-            placeholder="{{
-              selectedClient ? selectedClient.zip : 'Postal Code...'
-            }}"
-            id="inputZip"
-            required
-          />
-        </div>
-      </div>
-  
-      <div class="mb-3 row">
-        <div class="col-sm-9">
-          <input
-            class="form-control"
-            [readonly]="onRead"
-            formControlName="city"
-            type="text"
-            placeholder="{{ selectedClient ? selectedClient.city : 'City...' }}"
-            id="inputCity"
-          />
-        </div>
-      </div>
-  
-      <div class="mb-3 row">
-        <div class="col-sm-9">
-          <input
-            class="form-control"
-            [readonly]="onRead"
-            formControlName="tel"
-            type="text"
-            placeholder="{{
-              selectedClient ? selectedClient.tel : 'Telephone...'
-            }}"
-            id="inputTel"
-          />
-  
-          <div class="buttons">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              *ngIf="!selectedClient && onRead"
-              (click)="onAddNew()"
-            >
-              Add Client
-            </button>
-  
-            <button
-              *ngIf="selectedClient && onRead"
-              type="button"
-              class="btn btn-warning"
-              (click)="onEditClient()"
-            >
-              Edit Client
-            </button>
-            <button
-            *ngIf="selectedClient && onRead"
-            type="button"
-            class="btn btn-warning"
-            (click)="onResetForm()"
-          >
-            Reset Selection
-          </button>
-  
-            <button
-              *ngIf="onEdit || onCreate && !selectedClient"
-              type="button"
-              class="btn btn-success"
-              (click)="onAddClient()"
-            >
-              Save
-            </button>
-  
-            <button
-              *ngIf="onEdit || onCreate && !selectedClient"
-              type="button"
-              class="btn btn-danger"
-              (click)="onCancelEdit()"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <app-accounts [accountsOwner]="selectedClient"></app-accounts>
-  
+    </div>
+  </form>
+</div>
+<app-accounts [accountsOwner]="selectedClient"></app-accounts>

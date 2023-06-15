@@ -16,6 +16,7 @@ import { UserComponent } from './dashboard/counselor/list/user/user.component';
 import { DetailsComponent } from './dashboard/director/details/details.component';
 import { AccountsComponent } from './dashboard/counselor/form/accounts/accounts.component';
 import { CommonModule } from '@angular/common';
+import { TransferComponent } from './dashboard/counselor/form/transfer/transfer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';
     FormComponent,
     DetailsComponent,
     AccountsComponent,
+    TransferComponent,
   
   ],
   imports: [

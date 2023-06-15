@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { ClientService } from 'src/app/service/client.service';
@@ -12,8 +12,7 @@ export class ListComponent {
   allClients!: Client[];
   clients$!: Observable<Client[]>;
   clientsSubscription!: Subscription;
-  @Output()
-  clientToShow = new EventEmitter();
+
 
   constructor(private clientService : ClientService){}
   

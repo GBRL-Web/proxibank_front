@@ -28,6 +28,9 @@
       margin-top: 10px;
       display: flex;
       flex-direction: column;
+      label {
+        color: rgba(255, 255, 255, 0.8);
+      }
       input {
         display: flex;
         align-self: flex-end;
