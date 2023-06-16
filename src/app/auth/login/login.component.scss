@@ -15,6 +15,7 @@
     .card-header {
       text-align: center;
       border-radius: 13px 0px 0px 0px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
       padding: 10px;
       background: linear-gradient(
         90deg,
@@ -28,8 +29,10 @@
       margin-top: 10px;
       display: flex;
       flex-direction: column;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
       label {
         color: rgba(255, 255, 255, 0.8);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
       }
       input {
         display: flex;
@@ -37,6 +40,8 @@
         height: 30px;
         width: 100%;
         text-align: center;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
       }
     }
     button {

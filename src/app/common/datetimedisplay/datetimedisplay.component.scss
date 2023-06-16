@@ -1,0 +1,29 @@
+.clock {
+    display: flex !important;
+    width: 400px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    h3 {
+        font-size: 1.7rem;        
+        color: rgba($color: #ffffff, $alpha: 0.9);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    }
+}
+
+.blink {
+    animation: blink-animation 1s step-start infinite;
+  
+    @keyframes blink-animation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+  

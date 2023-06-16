@@ -11,6 +11,7 @@ p {
   align-items: center;
   font-size: 2rem;
   color: rgba($color: #fafafa, $alpha: 0.8);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
   background: $bkg-topbar-red;
   user-select: none;
 }
@@ -56,8 +57,10 @@ p {
   flex-direction: column;
   align-items: flex-end;
   user-select: none;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .btn {
   @include logout-button($transparent);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }

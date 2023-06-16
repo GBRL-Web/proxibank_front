@@ -17,6 +17,7 @@ import { DetailsComponent } from './dashboard/director/details/details.component
 import { AccountsComponent } from './dashboard/counselor/form/accounts/accounts.component';
 import { CommonModule } from '@angular/common';
 import { TransferComponent } from './dashboard/counselor/form/transfer/transfer.component';
+import { DateTimeDisplayComponent } from './common/datetimedisplay/datetimedisplay.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TransferComponent } from './dashboard/counselor/form/transfer/transfer.
     DetailsComponent,
     AccountsComponent,
     TransferComponent,
+    DateTimeDisplayComponent,
   
   ],
   imports: [
