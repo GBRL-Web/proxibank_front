@@ -1,9 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth } from 'src/app/models/auth';
-import { Employee } from 'src/app/models/employee';
 import { AuthenticationService } from 'src/app/service/auth.service';
 
 @Component({

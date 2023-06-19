@@ -1,8 +1,6 @@
 @mixin button-style($color) {
   color: white;
   border: 0;
-  height: 30px;
-  width: 180px;
   font-family: "Poppins", sans-serif;
   transition-duration: 300ms;
   background: $color;
@@ -39,4 +37,9 @@
     transition-duration: 100ms;
     box-shadow: inset 0 0 10px black;
   }
+}
+
+@mixin button-md-size() {
+  height: 30px;
+  width: 180px;
 }

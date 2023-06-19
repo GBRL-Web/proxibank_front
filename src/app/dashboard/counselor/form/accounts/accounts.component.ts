@@ -35,9 +35,10 @@ export class AccountsComponent {
     }
   }
 
-  openModal(): void {
+  openModal(account : Account): void {
     this.modalStateService.getModalState().subscribe(b => {console.log('Open modal ', b);
     });
+    console.log(account.accountNumber);
     
     this.modalStateService.setModalState(true);
   }

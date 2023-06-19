@@ -12,9 +12,7 @@ export class TransferComponent {
   constructor(private modalStateService: ModalStateService) {}
 
   ngOnInit(): void {
-    this.modalStateService.getModalState().subscribe(state => {
-      console.log('ngOnInit modal state: ',state);
-      
+    this.modalStateService.getModalState().subscribe(state => {     
       this.modalState = state;
     });
   }

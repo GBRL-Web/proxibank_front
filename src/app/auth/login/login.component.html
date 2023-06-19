@@ -5,7 +5,7 @@
         <h3>ProxiBank Login</h3>
       </div>
       <div class="card-content">
-        <div>
+        <div class="field">
           <label for="username">Username:</label>
           <input
             type="text"
@@ -14,9 +14,12 @@
             name="username"
             class="form-control"
             ngModel
+            required
+            #username="ngModel"
           />
+          <span class="error-block" *ngIf="!username.valid && username.touched">Please fill in this input with valid values!</span>
         </div>
-        <div>
+        <div class="field">
           <label for="password">Password:</label>
           <input
             type="password"
@@ -26,10 +29,13 @@
             class="form-control"
             (keyup.enter) = "onSubmit(f)"
             ngModel
+            required
+            #password="ngModel"
           />
+          <span class="error-block" *ngIf="!password.valid && password.touched">Please fill in this input with valid values!</span>
         </div>
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" [disabled]="!f.valid">Login</button>
     </div>
   </form>
 </div>

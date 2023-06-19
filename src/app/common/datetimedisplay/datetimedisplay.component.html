@@ -1,3 +1,9 @@
 <div class="clock">
-    <h3>{{ currentDate | date: 'mediumDate' }}  |  {{ currentHour }} <span class="blink">:</span> {{ currentMinute }}</h3>    
+  <div class="container">
+    <h3>{{ currentHour }} <span class="blink">:</span> {{ currentMinute }}</h3>
+    <h4>
+      {{ currentDay }},
+      {{ currentDate | date : "mediumDate" }}
+    </h4>
+  </div>
 </div>

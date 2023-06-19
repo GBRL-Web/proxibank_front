@@ -2,32 +2,35 @@
 @import "../../../../mixins";
 
 .main-form {
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+  .form-control {
+    width: 400px;
+    height: 30px;
+    margin: 5px;
+    text-align: center;
+  }
+  .buttons {
     display: flex;
-    justify-content: center;
-    padding-top: 80px;
-    .form-control {
-        width: 400px;
-        height: 30px;
-        margin: 5px;
-        text-align: center;
+    justify-content: space-around;
+    .btn {
+      &-primary {
+        @include button-md-size;
+        @include button-style($primary);
+      }
+      &-warning {
+        @include button-md-size;
+        @include button-style($warning);
+      }
+      &-success {
+        @include button-md-size;
+        @include button-style($success);
+      }
+      &-danger {
+        @include button-md-size;
+        @include button-style($danger);
+      }
     }
-    .buttons {
-        display: flex;
-        justify-content: space-around;
-        .btn {
-          &-primary {
-              @include button-style($primary);
-            }
-            &-warning {
-              @include button-style($warning);
-            }
-            &-success {
-              @include button-style($success);
-            }
-            &-danger {
-              @include button-style($danger);
-            }
-          }
-    }
+  }
 }
-

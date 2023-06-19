@@ -14,7 +14,6 @@ export class FormComponent {
   clientForm!: FormGroup;
   selectedClient$!: Observable<Client | null>;
   selectedClient!: Client;
-  private readonly destroySubj = new Subject<void>();
 
   onCreate: boolean = false;
   onEdit: boolean = false;
@@ -117,13 +116,12 @@ export class FormComponent {
         id: this.selectedClient.id,
         ...clientData
       };
-      this.clientService.updateClient(updatedClient).subscribe(() => {
+      this.clientService.updateClient(updatedClient)
         this.clientService.updateClientsAfterEdit(updatedClient);
         this.selectedClient = updatedClient;
         this.onEdit = false;
         this.onRead = true;
         this.clientForm.reset();
-      });
     }
     // Condition if the client is created.
     if (this.onCreate) {

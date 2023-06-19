@@ -1,7 +1,7 @@
 <div class="main-accounts">
   <table
     class="table table-striped"
-    *ngIf="accounts && accounts.length > 0; else NotSelected"
+    *ngIf="accounts && accounts.length > 0 || accountsOwner; else NotSelected"
   >
     <thead class="bg-secondary">
       <tr>
@@ -23,11 +23,12 @@
         </td>
         <td>{{ acc.openedAt | date : "dd/MM/yyyy" }}</td>
         <td>
-          <button (click)="openModal()">⇄</button>
+          <button (click)="openModal(acc)">⇄</button>
         </td>
       </tr>
     </tbody>
   </table>
+  <span *ngIf="accounts.length < 1 && accountsOwner">No accounts found.</span>
 </div>
 <ng-template #NotSelected> No client selected. </ng-template>
 <app-transfer></app-transfer>

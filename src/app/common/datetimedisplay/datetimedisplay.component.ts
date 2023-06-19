@@ -11,6 +11,8 @@ export class DateTimeDisplayComponent implements OnInit, OnDestroy {
   currentTime!: string;
   currentHour!: string;
   currentMinute!: string;
+  currentDay!: string;
+  days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   private intervalSubscription!: Subscription;
 
@@ -30,6 +32,7 @@ export class DateTimeDisplayComponent implements OnInit, OnDestroy {
   updateTime() {
     const hours = this.currentDate.getHours();
     const minutes = this.currentDate.getMinutes();
+    this.currentDay = this.days[this.currentDate.getDay()];
     this.currentHour = this.padNumber(hours);
     this.currentMinute = this.padNumber(minutes);
   }
