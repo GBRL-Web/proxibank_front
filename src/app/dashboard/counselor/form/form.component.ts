@@ -7,10 +7,9 @@ import { ClientService } from 'src/app/service/client.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
-
   clientForm!: FormGroup;
   selectedClient$!: Observable<Client | null>;
   selectedClient!: Client;
@@ -21,7 +20,7 @@ export class FormComponent {
 
   clientSub!: Subscription;
   modeSub!: Subscription;
-  
+
   @Input() onRead: boolean = true;
 
   @Output() userUpdated = new EventEmitter<Client>();
@@ -29,14 +28,16 @@ export class FormComponent {
   constructor(private clientService: ClientService) {}
 
   // Subscribes to SelectedClient and initializes the form.
-  ngOnInit() { 
-    this.clientSub = this.clientService.selectedClient$.subscribe((client: Client) => {
-      this.selectedClient = client;
-    });
-    this.initForm(); 
-    this.modeSub = this.clientService.editMode$.subscribe(editMode => {
+  ngOnInit() {
+    this.clientSub = this.clientService.selectedClient$.subscribe(
+      (client: Client) => {
+        this.selectedClient = client;
+      }
+    );
+    this.initForm();
+    this.modeSub = this.clientService.editMode$.subscribe((editMode) => {
       this.isEditMode = editMode;
-    });   
+    });
   }
 
   // Initialize the form with validations.
@@ -44,25 +45,25 @@ export class FormComponent {
     this.clientForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]+(([\' .-][a-zA-Z ])?[a-zA-Z]*)*$') // expects only letters and spaces
+        Validators.pattern("^[a-zA-Z]+(([' .-][a-zA-Z ])?[a-zA-Z]*)*$"), // expects only letters and spaces
       ]),
       surname: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]+(([\' .-][a-zA-Z ])?[a-zA-Z]*)*$') // expects only letters and spaces
+        Validators.pattern("^[a-zA-Z]+(([' .-][a-zA-Z ])?[a-zA-Z]*)*$"), // expects only letters and spaces
       ]),
       address: new FormControl('', Validators.required),
       zip: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[0-9]{5}$') // expects a 5 digit number
+        Validators.pattern('^[0-9]{5}$'), // expects a 5 digit number
       ]),
       city: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]+(([\' .-][a-zA-Z ])?[a-zA-Z]*)*$') // expects only letters and spaces
+        Validators.pattern("^[a-zA-Z]+(([' .-][a-zA-Z ])?[a-zA-Z]*)*$"), // expects only letters and spaces
       ]),
       tel: new FormControl('', [
         Validators.required,
-        Validators.pattern('^[0-9]{10}$') // expects a 10 digit number
-      ])
+        Validators.pattern('^[0-9]{10}$'), // expects a 10 digit number
+      ]),
     });
     this.updateFormValues(this.selectedClient);
   }
@@ -79,7 +80,7 @@ export class FormComponent {
         address: client.address,
         zip: client.zip,
         city: client.city,
-        tel: client.tel
+        tel: client.tel,
       });
     }
   }
@@ -108,28 +109,28 @@ export class FormComponent {
       address: formValue.address,
       zip: formValue.zip,
       city: formValue.city,
-      tel: formValue.tel
+      tel: formValue.tel,
     };
-  
+
     if (this.onEdit) {
       const updatedClient: Client = {
         id: this.selectedClient.id,
-        ...clientData
+        ...clientData,
       };
-      this.clientService.updateClient(updatedClient)
-        this.clientService.updateClientsAfterEdit(updatedClient);
-        this.selectedClient = updatedClient;
-        this.onEdit = false;
-        this.onRead = true;
-        this.clientForm.reset();
+      this.clientService.updateClient(updatedClient);
+      this.clientService.updateClientsAfterEdit(updatedClient);
+      this.selectedClient = updatedClient;
+      this.onEdit = false;
+      this.onRead = true;
+      this.clientForm.reset();
     }
     // Condition if the client is created.
     if (this.onCreate) {
       const updatedClient = {
-        ...clientData
+        ...clientData,
       } as Client;
       this.clientService.createClient(updatedClient).subscribe({
-        next:(result : Client) => {
+        next: (result: Client) => {
           this.clientService.updateClientsAfterAdd(result);
           alert('New client added successfully!');
           this.onEdit = false;
@@ -137,14 +138,14 @@ export class FormComponent {
           this.onCreate = false;
           this.clientForm.reset();
         },
-        error:(err) => {
+        error: (err) => {
           this.onCreate = false;
           alert(err);
-        }
+        },
       });
     }
   }
-// Condition if the user's information is being updated
+  // Condition if the user's information is being updated
   onEditClient() {
     this.onCreate = false;
     this.onRead = false;
@@ -157,7 +158,7 @@ export class FormComponent {
         address: this.selectedClient.address,
         zip: this.selectedClient.zip,
         city: this.selectedClient.city,
-        tel: this.selectedClient.tel
+        tel: this.selectedClient.tel,
       });
     }
   }
@@ -178,7 +179,7 @@ export class FormComponent {
     this.onEdit = false;
     this.onRead = true;
     this.clientForm.reset();
-    this.clientService.selectClient(undefined);  
+    this.clientService.selectClient(undefined);
   }
 
   // Unsubscribe from all subscriptions. Check to see if any subscriptions are missing.

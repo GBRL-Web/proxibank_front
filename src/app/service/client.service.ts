@@ -3,33 +3,31 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Client } from '../models/client';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
-
+  // Backend API URL.
   private apiUrl = 'http://localhost:8080/clients';
 
+  // All the clients variables.
   private clients!: Client[];
   private clientsSubject = new Subject<Client[]>();
   clients$ = this.clientsSubject.asObservable();
 
+  // The selected client variables.
   private clientSubject = new Subject<Client>();
   selectedClient$ = this.clientSubject.asObservable();
   private selectedClient!: Client;
-  
-  private editModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  // Edit mode for the client.
+  private editModeSubject: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
   public editMode$: Observable<boolean> = this.editModeSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.getClients();
-  }
-
-  setClients(clients: Client[]) {
-    this.clients = clients;
-    this.clientsSubject.next(this.clients);
   }
 
   getClients(): Observable<Client[]> {
@@ -45,7 +43,7 @@ export class ClientService {
         }),
         catchError((error: HttpErrorResponse) => {
           console.error("Une erreur s'est produite :", error);
-          return throwError(
+          throw new Error(
             "Quelque chose s'est mal passé ; Veuillez réessayer plus tard."
           );
         })
@@ -56,7 +54,7 @@ export class ClientService {
     return this.http.put<Client>(`${this.apiUrl}`, client).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error("Une erreur s'est produite :", error);
-        return throwError(
+        throw new Error(
           "Quelque chose s'est mal passé ; Veuillez réessayer plus tard."
         );
       })
@@ -68,8 +66,8 @@ export class ClientService {
     return this.http
       .post<Client>(`${this.apiUrl}/counselors/${id_cls.id}`, client)
       .pipe(
-        catchError((error: HttpErrorResponse) => {
-          return throwError(
+        catchError(() => {
+          throw new Error(
             'Une donnée est invalide veuillé vérifier le formulaire'
           );
         })

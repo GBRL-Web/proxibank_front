@@ -6,7 +6,7 @@
     />
   </div>
   <div class="seps">
-    <div>{{ client.name }} {{ client.surname | uppercase }}</div>
+    <div>{{ (client.name.length > 12) ? (client.name | slice:0:10)+"..." : client.name }} {{ client.surname | uppercase }} </div>
     <span class="arrow">➤</span>
   </div>
 </li>

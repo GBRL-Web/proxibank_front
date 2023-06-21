@@ -1,9 +1,14 @@
 @import "../../../colors";
+@import "../../../effects";
+@import "../../../mixins";
+
+
 .container {
   display: flex;
   height: 100%;
   justify-content: center;
   align-items: center;
+  animation: fade-in-from-bottom 500ms ease-out;
   .card {
     border-radius: 15px 0px 0px 0px;
     display: flex;
@@ -61,23 +66,8 @@
     button {
       margin-top: auto;
       margin-bottom: auto;
-      background: rgb(45, 45, 185);
-      color: white;
-      border: 0;
-      height: 40px;
-      font-family: "Poppins", sans-serif;
-      transition-duration: 300ms;
-      &:hover {
-        background: lighten(rgb(45, 45, 185), 10);
-        transition-duration: 300ms;
-        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-      }
-      &:active {
-        color: gray;
-        background: rgb(29, 29, 129);
-        transition-duration: 100ms;
-        box-shadow: inset 0 0 10px black;
-      }
+      height: 60px;
+      @include button-style($primary);
     }
   }
 }

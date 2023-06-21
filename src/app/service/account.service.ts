@@ -7,10 +7,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AccountService {
-  link = "http://localhost:8080/bankaccounts/client/"
+  link = "http://localhost:8080/accounts/"
   constructor(private http : HttpClient) { }
 
   getAccountsByClient(id : number) : Observable<Account[]>{
-    return this.http.get<Account[]>(this.link+id);
+    return this.http.get<Account[]>(this.link+"client/"+id);
+  }
+
+  transferTo(account : Account, amount : number) {
+
   }
 }

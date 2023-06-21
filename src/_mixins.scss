@@ -8,12 +8,19 @@
     background: lighten($color, 10);
     transition-duration: 300ms;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
   }
   &:active {
     color: gray;
     background: darken($color, 10);
     transition-duration: 100ms;
     box-shadow: inset 0 0 10px black;
+    transform: translateY(1px);
+  }
+  &:disabled {
+    pointer-events: none;
+    background-color: gray;
+
   }
 }
 
@@ -27,15 +34,17 @@
   transition-duration: 300ms;
   background: $color;
   &:hover {
-    background: lighten($color, 20);
+    background: lighten(rgba(66, 57, 187, 0.2), 20);
     transition-duration: 300ms;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
   }
   &:active {
     color: gray;
     background: darken($color, 20);
     transition-duration: 100ms;
     box-shadow: inset 0 0 10px black;
+    transform: translateY(2px);
   }
 }
 
