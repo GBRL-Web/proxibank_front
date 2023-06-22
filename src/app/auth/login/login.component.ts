@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Auth } from 'src/app/models/auth';
+import { Auth } from 'src/app/models/auth.model';
+import { Employee } from 'src/app/models/employee.model';
 import { AuthenticationService } from 'src/app/service/auth.service';
 
 @Component({
@@ -10,8 +11,6 @@ import { AuthenticationService } from 'src/app/service/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  @Input() username!: string;
-  @Input() password!: string;
 
   constructor(
     private authService: AuthenticationService,
@@ -25,8 +24,12 @@ export class LoginComponent {
     const credentials = new Auth(value.username, value.password);
     if (credentials) {
       this.authService.login(credentials).subscribe(
-        () => {
-          this.router.navigate(['/dashboard']);
+        () => {         
+          if (this.authService._isAuthenticated) {
+            this.router.navigate(['/dashboard']);
+          } else {
+            alert('Authentication failed. Please check your credentials.');
+          }
         },
         (error: any) => alert(error)
       );
@@ -34,4 +37,12 @@ export class LoginComponent {
       console.log('Duh.');
     }
   }
+
+  
+  
+  
+  
+  
+  
+  
 }

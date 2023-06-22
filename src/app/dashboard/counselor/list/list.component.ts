@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Client } from 'src/app/models/client';
+import { Client } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/service/client.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Employee } from 'src/app/models/employee';
+import { Employee } from 'src/app/models/employee.model';
 import { Component } from '@angular/core';
 
 @Component({

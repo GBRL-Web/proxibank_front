@@ -1,14 +1,15 @@
-@import "../../../../../colors";
+@import "../../../../../scss/colors";
 
 li {
   cursor: pointer;
+  font-size: 1.6rem;
   user-select: none;
   display: flex;
   align-items: center;
   background: $transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  height: 50px;
-  width: 250px;
+  border-bottom: .1rem solid rgba(255, 255, 255, 0.5);
+  height: 5rem;
+  width: 25rem;
   color: white;
   transition-duration: 300ms;
   .arrow {
@@ -16,13 +17,13 @@ li {
   }
   .iDiv {
     display: flex;
-    width: 60px;
+    width: 6rem;
     justify-content: center;
     align-items: center;
     img {
-      margin-left: 10px;
-      margin-right: 10px;
-      height: 40px;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      height: 4rem;
       border-radius: 50%;
       opacity: 0.1;
     }
@@ -30,8 +31,8 @@ li {
   &:hover {
     color: black;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px 0 0 15px;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+    border-radius: 1.5rem 0 0 1.5rem;
+    text-shadow: 0 0 .8rem rgba(0, 0, 0, 0.9);
     transition-duration: 300ms;
     .arrow {
       opacity: 0.8;
@@ -50,7 +51,7 @@ li {
     .iDiv {
       transition-duration: 100ms;
       img {
-        height: 35px;
+        height: 3.5rem;
         transition-duration: 100ms;
       }
     }
@@ -65,8 +66,8 @@ li {
 .chosen {
   color: black;
   background: rgba(255, 255, 255, 0.69);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 25px 0 0 25px;
+  text-shadow: 0 0 .5rem rgba(0, 0, 0, 0.2);
+  border-radius: 2.5rem 0 0 2.5rem;
   transition-duration: 300ms;
   .arrow {
     opacity: 0.8;
@@ -83,11 +84,11 @@ li {
 
 .disabled {
   img {
-    filter: blur(3px);
+    filter: blur(.3rem);
   }
   pointer-events: none;
   border-bottom: none;
   color: transparent;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 .5rem rgba(255, 255, 255, 0.5);
 
 }

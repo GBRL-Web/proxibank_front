@@ -1,8 +1,9 @@
-@import "../../../fonts";
+@import "../../../scss/fonts";
 
 .clock {
+  font-size: 1.6rem;
   display: flex !important;
-  width: 400px;
+  width: 40rem;
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -14,17 +15,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: .5rem;
     color: rgba($color: #00ff40, $alpha: 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 .5rem rgba(0, 0, 0, 0.7);
     h3 {
-      font-size: 3rem;      
+      font-size: 4rem;     
       font-family: "Cute Font", cursive;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      text-shadow: 0 0 .5rem rgba(255, 255, 255, 0.7);
     }
     h4 {
       font-family: "Cute Font", cursive;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+      text-shadow: 0 0 .5rem rgba(255, 255, 255, 0.7);
     }
   }
 }

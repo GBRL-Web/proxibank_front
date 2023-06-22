@@ -1,20 +1,20 @@
 <ng-container *ngIf="isConnected(); else default">
-  <div class="full-nav">
-    <div class="half">
+  <div class="navbar">
+    <div class="navbar-half">
       <button class="btn" (click)="logout()" role="button">Deconnexion</button>
     </div>
     <app-date-time-display></app-date-time-display>
-    <div class="half">
-      <div class="half left">
-        <div class="infoNav">
+    <div class="navbar-half">
+      <div class="navbar-half-left">
+        <div class="navbar-half-left-info">
           <h4>{{employee.name}} {{employee.surname}}</h4>
           <p>{{employee.role}}</p>
           <p>agence Lille 0122</p>
         </div>
       </div>
-      <div class="right">
+      <div class="navbar-half-right">
         <img
-          class="avatar"
+          class="navbar-half-right-avatar"
           src="../../../assets/img/img_avatar_male.png"
           alt="Image"
         />

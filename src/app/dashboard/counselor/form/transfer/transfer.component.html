@@ -1,4 +1,5 @@
 <div class="modal-setting" *ngIf="modalState">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
   <div class="modal">
     <div class="modal-header">
       <h4>Transfer</h4>
@@ -11,17 +12,37 @@
         <div class="modal-fields">
           <div class="modal-field">
             <label for="accNum">To account number:</label>
-            <input type="text" name="accNum" id="accNum" />
+            <input
+            type="text"
+            autocomplete="off"
+            id="accNum"
+            name="accNum"
+            class="form-control"
+            ngModel
+            required
+            #accNum="ngModel"
+          />
           </div>
           <div class="modal-field">
             <label for="accSum">Sum to be transfered:</label>
-            <input type="text" name="accSum" id="accSum" />
+            <input
+            type="text"
+            autocomplete="off"
+            id="accSum"
+            name="accSum"
+            class="form-control"
+            ngModel
+            required
+            #accSum="ngModel"
+          />
+            
           </div>
         </div>
         <div class="modal-action">
-            <button class="btn-transfer">👍</button>
+            <button class="btn-transfer" type="submit">👍</button>
         </div>
       </div>
     </div>
   </div>
+</form>
 </div>

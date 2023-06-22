@@ -1,15 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'fonts';
+@import 'scss/fonts';
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: inherit;
     font-family: 'Poppins', sans-serif;
     
+}
+html {
+    font-size: 62.5%;
 }
 body {
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
     background-color: black;
 }
