@@ -16,10 +16,9 @@ export class AccountService {
     return this.http.get<Account[]>(this.link + 'client/' + id);
   }
 
-  transferTo(toAccount: number, amount: number) {
-    const fromAcc = this.clientService.getSelectedClient().id;
-    const transfer = new Transfer(fromAcc, toAccount, amount);
-    console.log("[SERVICE-FRONT] TRANSFER: " + fromAcc + " " + toAccount + " " + amount);
+  transferTo(fromAcc: Account, toAccount: number, amount: number) {
+    const transfer = new Transfer(fromAcc.accountNumber, toAccount, amount);
+    console.log("[SERVICE-FRONT] TRANSFER: " + fromAcc.accountNumber + " " + toAccount + " " + amount);
 
     this.http.post(this.link + 'transfer', transfer).subscribe(
       (response) => {
@@ -28,7 +27,7 @@ export class AccountService {
       },
       (error) => {
         // Handle the error here
-        console.error('Transfer error', error);
+        console.error('Transfer error', error.message);
       }
     );
   }

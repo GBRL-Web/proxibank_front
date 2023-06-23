@@ -35,8 +35,8 @@
             required
             #accSum="ngModel"
           />
-            
-          </div>
+        </div>
+        <span class="error-block" *ngIf="(error$ | async) === false && accSum.touched">Not enough funds for transfer!</span>
         </div>
         <div class="modal-action">
             <button class="btn-transfer" type="submit">👍</button>

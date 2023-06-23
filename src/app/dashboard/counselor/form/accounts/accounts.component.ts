@@ -16,6 +16,7 @@ export class AccountsComponent {
   isModalOpen: boolean = false;
   @Input()
   accountsOwner!: Client;
+  acc! : Account;
 
   constructor(private accountService: AccountService, private modalStateService : ModalStateService) {}
 
@@ -35,11 +36,8 @@ export class AccountsComponent {
     }
   }
 
-  openModal(account : Account): void {
-    this.modalStateService.getModalState().subscribe(b => {console.log('Open modal ', b);
-    });
-    console.log(account.accountNumber);
-    
+  openModal(acc: Account): void {
+    this.acc = acc;
     this.modalStateService.setModalState(true);
   }
 }

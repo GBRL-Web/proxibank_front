@@ -31,4 +31,4 @@
   <span *ngIf="accounts.length < 1 && accountsOwner">No accounts found.</span>
 </div>
 <ng-template #NotSelected> No client selected. </ng-template>
-<app-transfer></app-transfer>
+<app-transfer [fromAcc]="acc"></app-transfer>
