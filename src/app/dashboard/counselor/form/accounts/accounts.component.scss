@@ -4,25 +4,34 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 6rem;
+  margin-top: 2rem;
   width: 70rem;
   .table {
+    table-layout: fixed;
     width: 90%;
     background: rgba($color: #ffffff, $alpha: 0.4);
     tr {
         height: 4rem;
-      td {
+      th, td {
+        // resize: horizontal;
         text-align: center;
         button {
           width: 5rem;
           border: none;
+          background: rgba($color: #aaaaaa, $alpha: 1);
           &:hover {
-            background: lighten(rgba(255, 255, 255, 1), 1);
+            background: lighten(rgba($color: #aaaaaa, $alpha: 1), 10%);
           }
           &:active {
-            background: darken(gray, 1);
+            background: darken(rgba($color: #aaaaaa, $alpha: 1), 30%);
           }
         }
+      }
+      th:first-child, td:first-child {
+        width: 6rem;
+      }
+      th:last-child, td:last-child {
+        width: 8rem;
       }
     }
   }

@@ -1,48 +1,49 @@
 <div class="modal-setting" *ngIf="modalState">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <div class="modal">
-    <div class="modal-header">
-      <h4>Transfer</h4>
-      <button class="btn" (click)="closeModal()">x</button>
-    </div>
-    <div class="modal-content">
-      <h2>Enter the transfer details:</h2>
-      <hr />
-      <div class="modal-bottom">
-        <div class="modal-fields">
-          <div class="modal-field">
-            <label for="accNum">To account number:</label>
-            <input
-            type="text"
-            autocomplete="off"
-            id="accNum"
-            name="accNum"
-            class="form-control"
-            ngModel
-            required
-            #accNum="ngModel"
-          />
+    <div class="modal modal-bkg">
+      <div class="modal-header">
+        <h4>Transfer</h4>
+        <button class="btn" (click)="closeModal()">x</button>
+      </div>
+      <div class="modal-content">
+        <h2>
+          Enter the transfer details [Account {{ fromAcc.accountNumber }}]:
+        </h2>
+        <hr />
+        <div class="modal-bottom">
+          <div class="modal-fields">
+            <div class="modal-field">
+              <label for="accNum">To account number:</label>
+              <input
+                type="text"
+                autocomplete="off"
+                id="accNum"
+                name="accNum"
+                class="form-control"
+                ngModel
+                required
+                #accNum="ngModel"
+              />
+            </div>
+            <div class="modal-field">
+              <label for="accSum">Sum to be transfered:</label>
+              <input
+                type="text"
+                autocomplete="off"
+                id="accSum"
+                name="accSum"
+                class="form-control"
+                ngModel
+                required
+                #accSum="ngModel"
+              />
+            </div>
           </div>
-          <div class="modal-field">
-            <label for="accSum">Sum to be transfered:</label>
-            <input
-            type="text"
-            autocomplete="off"
-            id="accSum"
-            name="accSum"
-            class="form-control"
-            ngModel
-            required
-            #accSum="ngModel"
-          />
-        </div>
-        <span class="error-block" *ngIf="(error$ | async) === false && accSum.touched">Not enough funds for transfer!</span>
-        </div>
-        <div class="modal-action">
+          <div class="modal-action">
             <button class="btn-transfer" type="submit">👍</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>

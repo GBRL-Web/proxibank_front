@@ -2,78 +2,78 @@
   <form [formGroup]="clientForm">
     <div>
       <input
-        [readonly]="onRead"
+        class="form-control"
         formControlName="name"
         type="text"
-        placeholder="{{ selectedClient ? selectedClient.name : 'Name...' }}"
-        class="form-control"
+        placeholder="{{ selectedClient ? selectedClient.name : 'Name' }}"
         id="inputName"
+        [readonly]="onRead"
         required
       />
+      <label for="inputName" class="label">Name</label>
     </div>
 
     <div>
       <input
         class="form-control"
-        [readonly]="onRead"
         formControlName="surname"
         type="text"
-        placeholder="{{
-          selectedClient ? selectedClient.surname : 'Surname...'
-        }}"
+        placeholder="{{ selectedClient ? selectedClient.surname : 'Surname' }}"
         id="inputSurname"
+        [readonly]="onRead"
         required
       />
+      <label for="inputSurname" class="label">Surname</label>
     </div>
 
     <div>
       <input
         class="form-control"
-        [readonly]="onRead"
         formControlName="address"
         type="text"
-        placeholder="{{
-          selectedClient ? selectedClient.address : 'Address...'
-        }}"
+        placeholder="{{ selectedClient ? selectedClient.address : 'Address' }}"
         id="inputAdress"
+        [readonly]="onRead"
         required
       />
+      <label for="inputAdress" class="label">Address</label>
     </div>
 
     <div>
       <input
         class="form-control"
-        [readonly]="onRead"
         formControlName="zip"
         type="number"
-        placeholder="{{
-          selectedClient ? selectedClient.zip : 'Postal Code...'
-        }}"
+        placeholder="{{ selectedClient ? selectedClient.zip : 'Postal Code' }}"
         id="inputZip"
+        [readonly]="onRead"
         required
       />
+      <label for="inputZip" class="label">Postal Code</label>
     </div>
 
     <div>
       <input
         class="form-control"
-        [readonly]="onRead"
         formControlName="city"
         type="text"
-        placeholder="{{ selectedClient ? selectedClient.city : 'City...' }}"
+        placeholder="{{ selectedClient ? selectedClient.city : 'City' }}"
         id="inputCity"
+        [readonly]="onRead"
       />
+      <label for="inputCity" class="label">City</label>
     </div>
 
     <div>
       <input
         class="form-control"
-        [readonly]="onRead"
         formControlName="tel"
         type="text"
-        placeholder="{{ selectedClient ? selectedClient.tel : 'Telephone...' }}"
+        placeholder="{{ selectedClient ? selectedClient.tel : 'Telephone' }}"
         id="inputTel"
+        [readonly]="onRead"
       />
+      <label for="inputTel" class="label">Telephone</label>
 
       <div class="buttons">
         <button

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ModalStateService } from 'src/app/service/modal-state.service';
 import { AccountService } from 'src/app/service/account.service';
 import { Account } from 'src/app/models/account.model';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',
@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 export class TransferComponent {
   modalState!: boolean;
   @Input() fromAcc!: Account;
-  error$!: Observable<boolean>;
+  private errorSubscription: Subscription | undefined;
 
   constructor(
     private modalStateService: ModalStateService,
@@ -24,22 +24,24 @@ export class TransferComponent {
     this.modalStateService.getModalState().subscribe((state) => {
       this.modalState = state;
     });
-    this.error$ = of(true);
   }
 
   onSubmit(form: NgForm): void {
-    const values = form.value;
-    const accNum = parseInt(values.accNum);
-    const accSum = parseInt(values.accSum);
+    if (form.valid) {
+      const values = form.value;
+      const accNum = parseInt(values.accNum);
+      const accSum = parseInt(values.accSum);
 
-    this.error$ = new Observable<boolean>((observer) => {
-      if (this.fromAcc.balance > accSum) {
-        this.accountService.transferTo(this.fromAcc, accNum, accSum);
-      } else {
-        observer.next(false); // Error: Insufficient balance
-      }
-      observer.complete();
-    });
+      this.errorSubscription = new Observable<boolean>((observer) => {
+        if (this.fromAcc.balance > accSum) {
+          console.log('[TRANSFER.COMPONENT.onSubmit] Called.');
+          this.accountService.transferTo(this.fromAcc, accNum, accSum);
+        } else {
+          observer.next(false); // Error: Insufficient balance
+        }
+        observer.complete();
+      }).subscribe();
+    }
   }
 
   closeModal(): void {

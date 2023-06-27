@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, merge } from 'rxjs';
 import { Client } from '../models/client.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
@@ -34,7 +34,8 @@ export class ClientService {
     const counselorId = JSON.parse(
       sessionStorage.getItem('currentUser') || '{}'
     ).id;
-    return this.http
+  
+    const clients$ = this.http
       .get<Client[]>(`${this.apiUrl}/counselor/${counselorId}`)
       .pipe(
         tap((clients) => {
@@ -48,6 +49,8 @@ export class ClientService {
           );
         })
       );
+  
+    return merge(this.clientsSubject.asObservable(), clients$);
   }
 
   updateClient(client: Client): Observable<Client> {
@@ -63,12 +66,17 @@ export class ClientService {
 
   createClient(client: Client): Observable<Client> {
     const id_cls = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    
     return this.http
       .post<Client>(`${this.apiUrl}/counselors/${id_cls.id}`, client)
       .pipe(
+        tap((newClient) => {
+          this.clients.push(newClient);
+          this.clientsSubject.next(this.clients);
+        }),
         catchError(() => {
           throw new Error(
-            'Une donnée est invalide veuillé vérifier le formulaire'
+            'Une donnée est invalide veuillez vérifier le formulaire'
           );
         })
       );
@@ -82,15 +90,6 @@ export class ClientService {
         this.clientsSubject.next(this.clients);
       });
     }
-  }
-
-  updateClientsAfterAdd(newClient: Client) {
-    this.clients.push(newClient);
-    this.clientsSubject.next(this.clients);
-  }
-
-  getAllClients(): Observable<Client[]> {
-    return this.clientsSubject.asObservable();
   }
 
   selectClient(client: any) {

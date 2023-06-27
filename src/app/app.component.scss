@@ -1,24 +1,59 @@
 @import "../scss/colors";
 .topbar-container {
-    margin-left: auto;
-    margin-right: auto;
-    height: 8rem;
-    width: 110rem;
-    border-radius: 0 0px 1.5rem 1.5rem;
-    overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  height: 8rem;
+  width: 110rem;
+  border-radius: 0 0px 1.5rem 1.5rem;
+  overflow: hidden;
 }
 .container {
-    display: flex;
-    justify-content: center;
-    height: 80rem;
-    width: 110rem;
-    border-radius: 0 0px 1.5rem 1.5rem;
-    background: $bkg-primary;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 80rem;
+  width: 110rem;
+  border-radius: 0 0px 1.5rem 1.5rem;
+  background: $bkg-primary;
+  overflow: hidden;
+//   z-index: -2;
+  .video-background {
+    position: absolute;
+    mix-blend-mode: difference;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgb(0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 20%
+    );
+    z-index: 0;
+  }
+  .login {
+    z-index: 10;
+  }
 }
 .footer-p {
-    color: rgba(255, 255, 255, 0.39);
-    font-size: 1rem;
-    width: 110rem;
-    display: flex;
-    justify-content: center;
+  color: rgba(255, 255, 255, 0.39);
+  font-size: 1rem;
+  width: 110rem;
+  display: flex;
+  justify-content: center;
 }

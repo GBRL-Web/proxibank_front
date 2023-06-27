@@ -4,12 +4,36 @@
 .main-form {
   display: flex;
   justify-content: center;
-  padding-top: 8rem;
+  padding-top: 2rem;
   .form-control {
     width: 40rem;
     height: 3rem;
     margin: .5rem;
+    border:none;
+    border-bottom: 2px solid transparent;
     text-align: center;
+    position: relative;
+    &:not(:last-child){
+      margin-bottom: .5rem;
+    }
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid green;
+    }
+  }
+  input:placeholder-shown + label {
+    opacity: 0;
+    visibility: hidden;
+    color: black ;
+    transform: translateY(-2rem);
+  }
+  .label {
+    display: block;
+    text-align: center;
+    position: relative;
+    transform: translateY(-5.5rem);
+    font-size: 1.2rem;
+    transition: all 0.5s ease;
   }
   .buttons {
     display: flex;

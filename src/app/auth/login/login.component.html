@@ -6,33 +6,33 @@
       </div>
       <div class="card-content">
         <div class="field">
-          <label for="username">Username:</label>
           <input
-            type="text"
-            autocomplete="off"
-            id="username"
-            name="username"
-            class="form-control"
-            ngModel
-            required
-            #username="ngModel"
+          type="text"
+          autocomplete="off"
+          id="username"
+          name="username"
+          class="form-control"
+          placeholder="Username"
+          ngModel
+          required
+          #username="ngModel"
           />
-          <span class="error-block" *ngIf="!username.valid && username.touched">Please fill in this input with valid values!</span>
+          <label for="username" class="label">Username</label>
         </div>
         <div class="field">
-          <label for="password">Password:</label>
           <input
-            type="password"
-            autocomplete="off"
-            name="password"
-            id="password"
-            class="form-control"
-            (keyup.enter) = "onSubmit(f)"
-            ngModel
-            required
-            #password="ngModel"
+          type="password"
+          autocomplete="off"
+          name="password"
+          id="password"
+          class="form-control"
+          (keyup.enter) = "onSubmit(f)"
+          placeholder="Password"
+          ngModel
+          required
+          #password="ngModel"
           />
-          <span class="error-block" *ngIf="!password.valid && password.touched">Please fill in this input with valid values!</span>
+          <label for="password" class="label">Password</label>
         </div>
       </div>
       <button type="submit" class="btn btn-up" [disabled]="!f.valid">Login</button>

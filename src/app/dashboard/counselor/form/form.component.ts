@@ -131,7 +131,6 @@ export class FormComponent {
       } as Client;
       this.clientService.createClient(updatedClient).subscribe({
         next: (result: Client) => {
-          this.clientService.updateClientsAfterAdd(result);
           alert('New client added successfully!');
           this.onEdit = false;
           this.onRead = true;

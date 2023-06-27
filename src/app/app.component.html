@@ -1,9 +1,18 @@
 <div class="topbar-container">
-    <app-topbar></app-topbar>
+  <app-topbar></app-topbar>
 </div>
 <div class="container">
+  <div class="login">
     <router-outlet></router-outlet>
+  </div>
+  <div class="video-background">
+    <video autoplay loop muted>
+      <source src="../assets/vid/dollars.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="gradient-overlay"></div>
 </div>
 <div class="footer-p">
-    <p>(c) GBRL 2023</p>
+  <p>(c) GBRL 2023</p>
 </div>
