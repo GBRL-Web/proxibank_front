@@ -1,9 +1,9 @@
 <div class="modal-setting" *ngIf="modalState">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <div class="modal modal-bkg">
+    <div class="modal">
       <div class="modal-header">
         <h4>Transfer</h4>
-        <button class="btn" (click)="closeModal()">x</button>
+        <button class="btn" (click)="closeModal()">&times;</button>
       </div>
       <div class="modal-content">
         <h2>

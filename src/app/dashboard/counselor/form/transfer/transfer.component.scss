@@ -24,21 +24,17 @@
     border-radius: 1.5rem 0 0 0;
     box-shadow: 0.5rem 1rem 0.8rem rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    transition: all .5s ease;
+    transition: all .5s .3s ease;
+    background: rgba(255, 255, 255, 0.69);
     &-header {
       font-size: 1.6rem;
-      height: 10%;
+      height: 3rem;
       display: flex;
       justify-content: space-between;
       border-radius: 1.5rem 0 0 0;
       margin: 0.5rem;
       padding: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgba(9, 9, 121, 1) 5%,
-        rgba(0, 212, 255, 0) 100%
-      );
+      background: $bkg-primary;
       h4 {
         color: white;
         font-weight: 400;
@@ -71,7 +67,7 @@
           }
           input {
             border:none;
-            border-bottom: 1px solid #00000065;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
             width: 300px;
             text-align: center;
             &:focus {
@@ -124,15 +120,7 @@
   margin: 0;
   padding: 0;
   font-size: 1rem;
-  color: red;
+  color: $danger;
   display: flex;
   justify-content: flex-end;
-}
-
-.modal-bkg {
-  background-image: url("../../../../../assets/img/transfer.jpg");
-  background-color: rgba(0, 0, 0, 0.5);
-  background-blend-mode: luminosity;
-  background-repeat: no-repeat;
-  background-size: 80rem 50rem;
 }

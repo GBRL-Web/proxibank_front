@@ -1,22 +1,19 @@
 $bkg-primary: linear-gradient(
   0deg,
-  rgba(2, 0, 36, 1) 0%,
-  rgba(36, 36, 116, 0.719) 25%,
-  rgba(0, 212, 255, 0) 100%
+  rgba(45, 45, 185, 0.7) 0%,
+  rgba(0, 0, 0, 0.8) 100%
 );
 
 $bkg-topbar-red: linear-gradient(
   0deg,
-  rgba(216, 27, 27, 0.69) 0%,
-  rgba(189, 54, 30, 0.719) 25%,
+  rgba(185, 45, 45, 0.7) 0%,
   rgba(0, 0, 0, 0.795) 100%
 );
 
 $bkg-topbar: linear-gradient(
   0deg,
-  rgba(241, 241, 241, 0.69) 0%,
-  rgba(54, 30, 189, 0.719) 25%,
-  rgba(0, 0, 0, 0.795) 100%
+  rgba(45, 45, 185, 0.7) 0%,
+  rgba(0, 0, 0, 0.8) 100%
 );
 
 $bkg-secondary: linear-gradient(
@@ -27,6 +24,6 @@ $bkg-secondary: linear-gradient(
 );
 
 $primary: rgba(45, 45, 185, 0.7);
-$warning: rgba(197, 172, 30, 0.7);
-$success: rgba(32, 238, 83, 0.7);
-$danger: rgba(238, 32, 32, 0.7);
+$warning: rgba(185, 185, 30, 0.7);
+$success: rgba(45, 185, 45, 0.7);
+$danger: rgba(185, 45, 45, 0.7);

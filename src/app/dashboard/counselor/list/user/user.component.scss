@@ -1,15 +1,16 @@
 @import "../../../../../scss/colors";
 
 li {
-  cursor: pointer;
+  height: 5rem;
+  width: 25rem;
   font-size: 1.6rem;
+  border:none;
   user-select: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   background: transparent;
-  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.5);
-  height: 5rem;
-  width: 25rem;
+  // border-bottom: 0.1rem solid rgba(255, 255, 255, 0.5);
   color: white;
   transition-duration: 300ms;
   .arrow {
