@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, map, throwError } from 'rxjs';
-import { Employee } from '../models/employee.model';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -36,8 +35,8 @@ export class AuthenticationService {
         }),
         map(() => true), // Emit true to indicate successful authentication
         catchError((error: any) => {
-          console.error(error);
-          return throwError('Identifiant ou mot de passe invalide');
+          console.error('Identifiant ou mot de passe invalide');
+          return throwError(() => new Error('Identifiant ou mot de passe invalide'));
         })
       );
   }

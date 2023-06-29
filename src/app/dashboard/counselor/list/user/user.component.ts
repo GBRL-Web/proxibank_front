@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/service/client.service';
 

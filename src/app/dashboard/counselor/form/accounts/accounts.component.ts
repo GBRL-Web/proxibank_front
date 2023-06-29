@@ -1,5 +1,4 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Account } from 'src/app/models/account.model';
 import { Client } from 'src/app/models/client.model';
 import { AccountService } from 'src/app/service/account.service';

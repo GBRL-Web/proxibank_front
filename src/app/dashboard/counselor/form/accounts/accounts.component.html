@@ -1,21 +1,19 @@
 <div class="main-accounts">
-  <table
-    class="table table-striped"
-    *ngIf="accounts && accounts.length > 0 || accountsOwner; else NotSelected"
-  >
+  <table class="table table-striped" *ngIf="accounts && accounts.length > 0 || accountsOwner; else NotSelected">
+    <caption>This is a table description</caption>
     <thead>
       <tr>
-        <th>#</th>
-        <th>Type</th>
-        <th>Balance</th>
-        <th>Card type</th>
-        <th>Opened at</th>
-        <th>Transfer</th>
+        <th scope="col">#</th>
+        <th scope="col">Type</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Card type</th>
+        <th scope="col">Opened at</th>
+        <th scope="col">Transfer</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let acc of accounts">
-        <th>{{ acc.accountNumber }}</th>
+        <td>{{ acc.accountNumber }}</td>
         <td>{{ acc.type }}</td>
         <td>{{ acc.balance }}</td>
         <td>

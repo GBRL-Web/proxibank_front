@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ModalStateService } from 'src/app/service/modal-state.service';
 import { AccountService } from 'src/app/service/account.service';
 import { Account } from 'src/app/models/account.model';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transfer',

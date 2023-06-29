@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/service/client.service';
 

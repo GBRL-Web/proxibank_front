@@ -19,16 +19,15 @@ export class AccountService {
   transferTo(fromAcc: Account, toAccount: number, amount: number) {
     const transfer = new Transfer(fromAcc.accountNumber, toAccount, amount);
     console.log("[SERVICE-FRONT] TRANSFER: " + fromAcc.accountNumber + " " + toAccount + " " + amount);
-
-    this.http.post(this.link + 'transfer', transfer).subscribe(
-      (response) => {
+    this.http.post(this.link + 'transfer', transfer).subscribe({
+      next: (response) => {
         // Handle the response here
         console.log('Transfer successful', response);
       },
-      (error) => {
+      error: (error) => {
         // Handle the error here
         console.error('Transfer error', error.message);
       }
-    );
+    });
   }
 }
