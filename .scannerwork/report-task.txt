@@ -2,5 +2,5 @@ projectKey=ProxiBank_front_projkey_2023
 serverUrl=http://localhost:9000
 serverVersion=9.9.1.69595
 dashboardUrl=http://localhost:9000/dashboard?id=ProxiBank_front_projkey_2023
-ceTaskId=AYkGZamFdffas6BqyzIq
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYkGZamFdffas6BqyzIq
+ceTaskId=AYkHbrn65_T9Kz_RATN0
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYkHbrn65_T9Kz_RATN0

@@ -6,10 +6,11 @@
     <router-outlet></router-outlet>
   </div>
   <div class="video-background">
-    <video autoplay loop muted>
+
+    <video id="video" preload="metadata" autoplay loop muted>
       <source src="../assets/vid/dollars.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+      <track label="English" kind="captions" srclang="en" default>
+   </video>
   </div>
   <div class="gradient-overlay"></div>
 </div>
