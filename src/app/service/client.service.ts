@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, merge } from 'rxjs';
 import { Client } from '../models/client.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +32,9 @@ export class ClientService {
 
   getClients(): Observable<Client[]> {
     const counselorId = JSON.parse(
-      sessionStorage.getItem('currentUser') || '{}'
+      sessionStorage.getItem('currentUser') ?? '{}'
     ).id;
-  
+
     const clients$ = this.http
       .get<Client[]>(`${this.apiUrl}/counselor/${counselorId}`)
       .pipe(
@@ -43,32 +43,33 @@ export class ClientService {
           this.clientsSubject.next(this.clients);
         }),
         catchError((error: HttpErrorResponse) => {
-          console.error("Une erreur s'est produite :", error);
+          console.error("An error occurred:", error);
           throw new Error(
-            "Quelque chose s'est mal passé ; Veuillez réessayer plus tard."
+            "Something went wrong; please try again later."
           );
         })
       );
-  
+
     return merge(this.clientsSubject.asObservable(), clients$);
   }
 
   updateClient(client: Client): Observable<Client> {
     return this.http.put<Client>(`${this.apiUrl}`, client).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error("Une erreur s'est produite :", error);
+        console.error("An error occurred:", error);
         throw new Error(
-          "Quelque chose s'est mal passé ; Veuillez réessayer plus tard."
+          "Something went wrong; please try again later."
         );
       })
     );
   }
 
   createClient(client: Client): Observable<Client> {
-    const id_cls = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+    console.log("[SERVICE-FRONT] Creating client...");
     
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser') ?? '{}');
     return this.http
-      .post<Client>(`${this.apiUrl}/counselors/${id_cls.id}`, client)
+      .post<Client>(`${this.apiUrl}/counselor/${currentUser.id}`, client)
       .pipe(
         tap((newClient) => {
           this.clients.push(newClient);
@@ -76,7 +77,7 @@ export class ClientService {
         }),
         catchError(() => {
           throw new Error(
-            'Une donnée est invalide veuillez vérifier le formulaire'
+            'Invalid data; please check the form.'
           );
         })
       );
@@ -104,4 +105,24 @@ export class ClientService {
   setEditMode(editMode: boolean): void {
     this.editModeSubject.next(editMode);
   }
+
+  deleteClient(client: Client): Observable<string> {
+    console.log("[SERVICE-FRONT] Delete activated.");
+    const index = this.clients.findIndex((c) => c.id === client.id);
+    if (index !== -1) {
+      this.clients.splice(index, 1);
+      this.clientsSubject.next(this.clients);
+      return this.http.delete<string>(`${this.apiUrl}/delete/${client.id}`).pipe(
+        map(() => "Client deleted successfully."),
+        catchError((error: HttpErrorResponse) => {
+          console.error("An error occurred:", error);
+          throw new Error(
+            "Something went wrong; please try again later."
+          );
+        })
+      );
+    }
+    throw new Error("The specified client does not exist.");
+  }
 }
+

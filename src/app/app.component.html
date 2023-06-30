@@ -3,14 +3,13 @@
 </div>
 <div class="container">
   <div class="login">
-    <router-outlet></router-outlet>
+    <router-outlet [@fadeInOut]></router-outlet>
   </div>
   <div class="video-background">
-
     <video id="video" preload="metadata" autoplay loop muted>
       <source src="../assets/vid/dollars.mp4" type="video/mp4" />
-      <track label="English" kind="captions" srclang="en" default>
-   </video>
+      <track label="English" kind="captions" srclang="en" default />
+    </video>
   </div>
   <div class="gradient-overlay"></div>
 </div>

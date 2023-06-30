@@ -23,7 +23,13 @@ $bkg-secondary: linear-gradient(
   rgba(0, 212, 255, 0) 100%
 );
 
-$primary: rgba(45, 45, 185, 0.7);
-$warning: rgba(185, 185, 30, 0.7);
-$success: rgba(45, 185, 45, 0.7);
-$danger: rgba(185, 45, 45, 0.7);
+$bkg-primary-90: linear-gradient(
+  90deg,
+  rgba(45, 45, 185, 0.7) 0%,
+  rgba(0, 0, 0, 0) 100%
+);
+
+$primary: rgba(45, 45, 185);
+$warning: rgba(185, 185, 30);
+$success: rgba(45, 185, 45);
+$danger: rgba(185, 45, 45);

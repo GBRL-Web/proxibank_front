@@ -18,6 +18,7 @@ import { AccountsComponent } from './dashboard/counselor/form/accounts/accounts.
 import { CommonModule } from '@angular/common';
 import { TransferComponent } from './dashboard/counselor/form/transfer/transfer.component';
 import { DateTimeDisplayComponent } from './common/datetimedisplay/datetimedisplay.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DateTimeDisplayComponent } from './common/datetimedisplay/datetimedispl
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

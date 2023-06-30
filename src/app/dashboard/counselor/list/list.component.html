@@ -1,12 +1,12 @@
 <div>
   <div *ngIf="(clients$ | async)?.length; else loading">
     <div class="overflow-auto">
-      <ol class="list-group">
+      <div [@listAnimation]="allClients.length">
         <app-user
           *ngFor="let sclient of allClients"
           [client]="sclient"
         ></app-user>
-      </ol>
+      </div>
     </div>
   </div>
   <ng-template #loading>

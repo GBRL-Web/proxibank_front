@@ -34,7 +34,7 @@
       border-radius: 1.5rem 0 0 0;
       margin: 0.5rem;
       padding: 0;
-      background: $bkg-primary;
+      background: $bkg-primary-90;
       h4 {
         color: white;
         font-weight: 400;
@@ -43,10 +43,10 @@
         margin-bottom: auto;
       }
       .btn {
-        border: none;
         width: 3rem;
         height: 3rem;
         @include button-style($danger);
+        border: none;
       }
     }
     &-content {
@@ -66,8 +66,9 @@
           }
           input {
             border:none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-            width: 300px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            height: 3rem;
+            width: 30rem;
             text-align: center;
             &:focus {
               outline: none;

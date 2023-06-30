@@ -1,4 +1,9 @@
-<li class="list-group-item {{editMode && client !== selClient ? 'disabled' : ''}} {{client == selClient ? 'chosen' : ''}}"  (click)="showDetails()">
+<li
+  class="list-group-item {{
+    editMode && client !== selClient ? 'disabled' : ''
+  }} {{ client == selClient ? 'chosen' : '' }}"
+  (click)="showDetails()"
+  [@listAnimationItem]>
   <div class="iDiv">
     <img
       src="../../../../../assets/img/default_profil_picture.jpg"
@@ -6,7 +11,23 @@
     />
   </div>
   <div class="seps">
-    <div>{{ (client.name.length > 12) ? (client.name | slice:0:10)+"..." : client.name }} {{ client.surname | uppercase }} </div>
-    <span class="arrow">➤</span>
+    <div class="tc">
+      {{
+        client.name.length > 12
+          ? (client.name | slice : 0 : 10) + "..."
+          : client.name
+      }}
+      {{ client.surname | uppercase }}
+    </div>
+    <div>
+      <button
+        class="btn-small"
+        *ngIf="editMode && client == selClient"
+        (click)="delete()"
+      >
+        &times;
+      </button>
+      <span class="arrow">➤</span>
+    </div>
   </div>
 </li>
